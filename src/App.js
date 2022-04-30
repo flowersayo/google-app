@@ -22,7 +22,7 @@ const LeftBtn = styled.a`
   margin-left: 15px;
   color: #202124;
   font-size: 14px;
-  font-family: Apple SD Gothic Neo, arial, sans-serif;
+  font-family: arial, sans-serif;
 `;
 
 const Right = styled.div`
@@ -34,7 +34,7 @@ const Right = styled.div`
   justify-content: flex-end;
 `;
 const RightBtn = styled.a`
-  font: 13px/27px Roboto, RobotoDraft, Arial, sans-serif;
+  font: 13px/27px Arial, sans-serif;
   color: rgba(0, 0, 0, 0.87);
   margin: auto 0; //  vertical align 을 center로
   padding-right: 15px;
@@ -51,18 +51,19 @@ const Top = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
+const Logo = styled.image`
+  margin-top: auto;
+  background: ${(props) => props.theme.bgColor || "black"};
+  border: none;
+  outline: none;
+`;
 const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
 `;
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+
 const Input = styled.div`
   display: flex;
   justify-content: space-around;
@@ -79,13 +80,10 @@ const InputConsol = styled.input`
   width: 400px;
   outline: none;
 `;
-
-const Button = styled.button`
-  margin-right: 10px;
-  background: ${(props) => props.theme.bgColor || "white"};
-  color: ${(props) => props.theme.fontColor || "black"};
-  border: none;
-  outline: none;
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 const GrayButton = styled.button`
   margin-right: 10px;
@@ -100,23 +98,13 @@ const GrayButton = styled.button`
   border-radius: 10px;
 `;
 const Image = styled.image`
-  background: ${(props) => props.theme.bgColor || "white"};
-  border: none;
-  outline: none;
   width: 48px;
   float: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto 0;
-  color: #5f6368;
 `;
-const Logo = styled.image`
-  margin-top: auto;
-  background: ${(props) => props.theme.bgColor || "black"};
-  border: none;
-  outline: none;
-`;
+
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   display: flex;
@@ -127,28 +115,35 @@ const Wrapper = styled.div`
   color: #202124;
 `;
 
+const Link = styled.a.attrs((props) => ({
+  //props를 통해 attribute설정 가능
+  href: props.href,
+}))`
+  margin-right: 23px;
+  color: #70757a;
+  text-decoration: none;
+`;
+
 const FooterWrapper = styled.div`
   box-sizing: border-box;
   background-color: #f2f2f2;
 `;
 
 const Footer1 = styled.div`
-  color: ${(props) => props.theme.fontColor || "#70757a"};
+  color: #70757a;
   align-content: flex-start;
   padding: 15px 30px;
   border-bottom: 1px solid #dadce0;
   font-size: 15px;
-  background-color: ${(props) => props.theme.footColor};
 `;
 const Footer2 = styled.div`
-  color: ${(props) => props.theme.fontColor || "gray"};
+  color: #70757a;
   display: flex;
   flex-direction: row;
   padding: 0 20px;
   justify-content: space-evenly;
   padding: 15px 30px;
   font-size: 15px;
-  background-color: ${(props) => props.theme.footColor};
 `;
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -216,69 +211,26 @@ function App() {
           <Footer1>대한민국</Footer1>
           <Footer2>
             <div>
-              <a
-                href="https://ads.google.com/intl/ko_kr/home/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              <Link href="https://ads.google.com/intl/ko_kr/home/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1">
                 광고
-              </a>
-              <a
-                href="https://www.google.com/intl/ko_kr/business/"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              </Link>
+              <Link href="https://www.google.com/intl/ko_kr/business/">
                 비즈니스
-              </a>
-              <a
-                href="https://www.google.com/search/howsearchworks/?fg=1"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              </Link>
+              <Link href="https://www.google.com/search/howsearchworks/?fg=1">
                 검색의 원리
-              </a>
+              </Link>
             </div>
-
             <div>
-              <a
-                href="https://policies.google.com/u/1/privacy?hl=ko/fg=1"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              <Link href="https://policies.google.com/u/1/privacy?hl=ko/fg=1">
                 개인정보처리방침
-              </a>
-              <a
-                href="https://policies.google.com/u/1/terms?hl=ko/fg=1"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              </Link>
+              <Link href="https://policies.google.com/u/1/terms?hl=ko/fg=1">
                 약관
-              </a>
-              <a
-                href="https://www.google.com/search/howsearchworks/?fg=1"
-                style={{
-                  marginRight: "23px",
-                  color: "#70757a",
-                  textDecoration: "none",
-                }}
-              >
+              </Link>
+              <Link href="https://www.google.com/search/howsearchworks/?fg=1">
                 설정
-              </a>
+              </Link>
             </div>
           </Footer2>
         </FooterWrapper>
