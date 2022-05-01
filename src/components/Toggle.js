@@ -25,7 +25,7 @@ const ToggleBtn = styled.button`
   border-radius: 30px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => (!props.toggle ? "lightgray" : "#0055FF")};
+  background-color: ${(props) => (!props.toggle ? "lightgray" : "white")};
   position: relative;
   display: flex;
   justify-content: center;
@@ -33,7 +33,7 @@ const ToggleBtn = styled.button`
   transition: all 0.5s ease-in-out;
 `;
 const Circle = styled.div`
-  background-color: white;
+  background-color: ${(props) => (!props.toggle ? "white" : "black")};
   width: 24px;
   height: 24px;
   border-radius: 50px;

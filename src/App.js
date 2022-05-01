@@ -179,7 +179,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <Wrapper>
         <Header>
-          <Toggle toggle={toggle} setToggle={setToggle} />
           <LeftBtn>Google 정보</LeftBtn>
           <LeftBtn>스토어</LeftBtn>
           <Right>
@@ -192,6 +191,7 @@ function App() {
             <Image>
               <img src={profile} style={{ borderRadius: "50%" }} />
             </Image>
+            <Toggle toggle={toggle} setToggle={setToggle} />
           </Right>
         </Header>
         <Top>
@@ -220,6 +220,7 @@ function App() {
           </Row>
         </Center>
         <Gap />
+
         <FooterWrapper>
           <Footer1>대한민국</Footer1>
           <Footer2>
