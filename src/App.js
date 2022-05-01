@@ -7,6 +7,13 @@ import buttons from "./assets/button.PNG";
 import menu from "./assets/menu.png";
 import Toggle from "./components/Toggle";
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+`;
+
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -17,36 +24,32 @@ const Header = styled.div`
 `;
 
 const LeftBtn = styled.a`
-  display: inline-block;
   padding: 5px;
   margin: 0 5px;
   margin-left: 15px;
-
-  color: ${(props) => props.theme.fontColor || "black"};
-  background: ${(props) => props.theme.bgColor || "white"};
+  color: #202124;
   font-size: 14px;
   font-family: arial, sans-serif;
 `;
 
 const Right = styled.div`
-  display: inline-block;
   flex: 1;
   height: 48px;
-  display: block;
   display: flex;
   justify-content: flex-end;
 `;
 const RightBtn = styled.a`
   font: 13px/27px Arial, sans-serif;
-  color: ${(props) => props.theme.fontColor || "black"};
-  background: ${(props) => props.theme.bgColor || "white"};
-  margin: auto 0; //  vertical align 을 center로
+  color: rgba(0, 0, 0, 0.87);
+  margin: auto 0; //  vertical align 을 center로
   padding-right: 15px;
-  font-family: arial, sans-serif;
 `;
 
-const Gap = styled.div`
-  flex-grow: 1;
+const Image = styled.div`
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Top = styled.div`
@@ -57,7 +60,6 @@ const Top = styled.div`
 `;
 const Logo = styled.image`
   margin-top: auto;
-  background: ${(props) => props.theme.bgColor || "black"};
   border: none;
   outline: none;
 `;
@@ -104,71 +106,55 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-top: 18px;
 `;
+
 const GrayButton = styled.button`
   margin-right: 10px;
-  background: ${(props) => props.theme.default || "#F8F9F9"};
-  color: ${(props) => props.theme.fontColor || "black"};
+  background: #f8f9fa;
+  color: #3c4043;
   border: none;
   outline: none;
-  margin-top: 30px;
-  height: 35px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 10px;
+  margin: 11px 4px;
+  padding: 0 16px;
+  height: 36px;
+  border-radius: 4px;
 `;
-const Image = styled.div`
-  width: 48px;
-  float: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${(props) => props.theme.bgColor || "white"};
-`;
-
-const Wrapper = styled.div`
-  background-color: ${(props) => props.theme.bgColor};
-
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  font-family: arial, sans-serif;
-  color: #202124;
-`;
-
-const Link = styled.a.attrs((props) => ({
-  //props를 통해 attribute설정 가능
-  href: props.href,
-}))`
-  margin-right: 23px;
-  color: #70757a;
-  text-decoration: none;
+const Gap = styled.div`
+  flex: 1;
 `;
 
 const FooterWrapper = styled.div`
-  box-sizing: border-box;
   background-color: #f2f2f2;
+  flex-shrink: 0;
+  box-sizing: border-box;
 `;
-
 const Footer1 = styled.div`
-  color: ${(props) => props.theme.footColor || "gray"};
+  color: #70757a;
   align-content: flex-start;
   padding: 15px 30px;
   border-bottom: 1px solid #dadce0;
   font-size: 15px;
-  background-color: ${(props) => props.theme.footBgColor};
 `;
 const Footer2 = styled.div`
-  color: ${(props) => props.theme.footColor || "gray"};
-  background-color: ${(props) => props.theme.footBgColor};
+  color: #70757a;
   display: flex;
   flex-direction: row;
-  padding: 0 20px;
   justify-content: space-evenly;
-  padding: 15px 30px;
+  padding: 0 20px;
   font-size: 15px;
+  flex-wrap: wrap;
 `;
+const Link = styled.a.attrs((props) => ({
+  //props를 통해 attribute설정 가능
+  href: props.href,
+}))`
+  color: #70757a;
+  text-decoration: none;
+  padding: 15px;
+  display: inline-block;
+`;
+
 function App() {
   const [toggle, setToggle] = useState(false); // false : 라이트 모드 , true : 다크모드
 
@@ -189,7 +175,6 @@ function App() {
 
   const theme = toggle ? dark : light;
 
-  console.log(theme);
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
