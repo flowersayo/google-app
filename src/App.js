@@ -5,6 +5,7 @@ import logo from "./assets/google.png";
 import search from "./assets/search.PNG";
 import buttons from "./assets/button.PNG";
 import menu from "./assets/menu.png";
+import Toggle from "./components/Toggle";
 
 const Header = styled.div`
   display: flex;
@@ -20,7 +21,9 @@ const LeftBtn = styled.a`
   padding: 5px;
   margin: 0 5px;
   margin-left: 15px;
-  color: #202124;
+
+  color: ${(props) => props.theme.fontColor || "black"};
+  background: ${(props) => props.theme.bgColor || "white"};
   font-size: 14px;
   font-family: arial, sans-serif;
 `;
@@ -35,7 +38,8 @@ const Right = styled.div`
 `;
 const RightBtn = styled.a`
   font: 13px/27px Arial, sans-serif;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${(props) => props.theme.fontColor || "black"};
+  background: ${(props) => props.theme.bgColor || "white"};
   margin: auto 0; //  vertical align 을 center로
   padding-right: 15px;
   font-family: arial, sans-serif;
@@ -57,6 +61,7 @@ const Logo = styled.image`
   border: none;
   outline: none;
 `;
+
 const Center = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,11 +80,26 @@ const Input = styled.div`
   border: 1px solid lightgray;
   outline: none;
 `;
-const InputConsol = styled.input`
+
+//const [search, setSearch] = useState(""); //검색창에 입력한 값
+
+const InputConsol = styled.input.attrs({
+  onKeyDown: (e) => {
+    if (e.key === "Enter") {
+      console.log("Enter");
+      var keyword = e.target.value;
+      var link = `https://www.google.co.kr/search?q=${keyword}`;
+      window.location.href = link; // 기존 브라우저에서 보이는 화면을 교체하는 법
+      //window.location.replace(link); -> 이 방법도 가능하긴 한데 뒤로가기 버튼이 안됨.
+      //window.open(link); 새 창으로 여는 법
+    }
+  },
+})`
   border: 1px solid white;
   width: 400px;
   outline: none;
 `;
+
 const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -97,21 +117,23 @@ const GrayButton = styled.button`
   padding-right: 20px;
   border-radius: 10px;
 `;
-const Image = styled.image`
+const Image = styled.div`
   width: 48px;
   float: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${(props) => props.theme.bgColor || "white"};
 `;
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.bgColor};
+
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  font-family: Apple SD Gothic Neo, arial, sans-serif;
+  font-family: arial, sans-serif;
   color: #202124;
 `;
 
@@ -130,14 +152,16 @@ const FooterWrapper = styled.div`
 `;
 
 const Footer1 = styled.div`
-  color: #70757a;
+  color: ${(props) => props.theme.footColor || "gray"};
   align-content: flex-start;
   padding: 15px 30px;
   border-bottom: 1px solid #dadce0;
   font-size: 15px;
+  background-color: ${(props) => props.theme.footBgColor};
 `;
 const Footer2 = styled.div`
-  color: #70757a;
+  color: ${(props) => props.theme.footColor || "gray"};
+  background-color: ${(props) => props.theme.footBgColor};
   display: flex;
   flex-direction: row;
   padding: 0 20px;
@@ -146,11 +170,13 @@ const Footer2 = styled.div`
   font-size: 15px;
 `;
 function App() {
-  const [themeMode, setThemeMode] = useState("light");
+  const [toggle, setToggle] = useState(false); // false : 라이트 모드 , true : 다크모드
+
   const dark = {
     titleColor: "#121212",
-    footColor: "#242424",
-    bgColor: "black",
+    footBgColor: "black",
+    footColor: "gray",
+    bgColor: "#242424",
     fontColor: "white",
     default: "black",
   };
@@ -158,17 +184,17 @@ function App() {
     titleColor: "#b8b8b8",
     footColor: "#F2F2F2",
     bgColor: "white",
+    fontColor: "#202124",
   };
 
-  const theme = themeMode === "light" ? light : dark;
-  const toggleTheme = () => {
-    setThemeMode(themeMode === "light" ? "dark" : "light");
-    console.log(themeMode);
-  };
+  const theme = toggle ? dark : light;
+
+  console.log(theme);
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <Header>
+          <Toggle toggle={toggle} setToggle={setToggle} />
           <LeftBtn>Google 정보</LeftBtn>
           <LeftBtn>스토어</LeftBtn>
           <Right>
@@ -191,7 +217,9 @@ function App() {
         <Center>
           <Input>
             <img src={search} style={{ margin: "7px" }} />
+
             <InputConsol />
+
             <img
               src={buttons}
               style={{
@@ -221,6 +249,7 @@ function App() {
                 검색의 원리
               </Link>
             </div>
+
             <div>
               <Link href="https://policies.google.com/u/1/privacy?hl=ko/fg=1">
                 개인정보처리방침
